@@ -1,24 +1,30 @@
-import logo from './logo.svg';
+import {useState} from 'react';
 import './App.css';
 
 function App() {
+  const [age,setAge] = useState('');
+  const [ageDisplay, setAgeDisplay] = useState('--')
+  function calculate(){
+    const date = new Date();
+    const todayYear = date.getFullYear();
+    const inputAgeYear = age.slice(0,4);
+    if(age !== '')
+      setAgeDisplay(todayYear-inputAgeYear);
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div className="container">
+        <div className="content">
+          <h1>Age Calculator</h1>
+          <div className="calculator">
+            <h3>Enter your date of birth</h3>
+            <input type="date" name="age" id="age" onChange={(e) => {setAge(e.target.value)}} />
+            <button onClick={calculate} >Calculate Age</button>
+          </div>
+          <h2>You are {ageDisplay} years old</h2>
+        </div>
+      </div>
+    </>
   );
 }
 
